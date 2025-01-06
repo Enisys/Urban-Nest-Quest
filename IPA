@@ -1,0 +1,38 @@
+from PIL import Image, ImageDraw, ImageFont
+
+# Load the uploaded template image
+template_path = "/mnt/data/repository-open-graph-template.png"
+output_path = "/mnt/data/customized_repo_card.png"
+business_logo_path = None  # Add logo if available
+
+# Open the image
+img = Image.open(template_path)
+draw = ImageDraw.Draw(img)
+
+# Define new content
+business_name = "Urban Nest Quest"
+tagline = "Your Apartment Locating Experts in Houston"
+website = "www.urbannestquest.com"
+contact_info = "info@urbannestquest.com | 936-224-1484"
+branding_color = (0, 102, 204)  # Blue
+
+# Define fonts and sizes (adjust paths and sizes if necessary)
+font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # Default system font
+font_large = ImageFont.truetype(font_path, 70)
+font_medium = ImageFont.truetype(font_path, 40)
+font_small = ImageFont.truetype(font_path, 30)
+
+# Clear GitHub logo and add new branding
+draw.rectangle([(0, 0), (1200, 400)], fill="white")  # Clear top area for branding
+
+# Add business name and tagline
+draw.text((50, 50), business_name, font=font_large, fill=branding_color)
+draw.text((50, 150), tagline, font=font_medium, fill="black")
+
+# Add contact information and website
+draw.text((50, 300), contact_info, font=font_small, fill="black")
+draw.text((50, 350), website, font=font_small, fill=branding_color)
+
+# Save the customized image
+img.save(output_path)
+output_path
